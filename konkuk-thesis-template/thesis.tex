@@ -1,0 +1,83 @@
+% !TeX program = tectonic
+\documentclass{konkuk-master-thesis-kor}
+
+\makeatletter
+\def\input@path{{style/}{./}}
+\makeatother
+
+\abstracttitle{무작위 개념의 비체계적 결합이 문서 분량에 미치는 영향에 관한 탐색적 연구}
+\abstractsubtitle{내용 없는 논문의 외형적 신뢰도가 아무 의미없음을 나타낸다는 무의미에 대한 고찰}
+\authorname{아무개}
+\schoolname{건국대학교 고등아무말교육대학원}
+\departmentname{아무말과학과 내용부재연구전공}
+\keywords{아무말, 형식미, 논문놀이, 테스트용 원고, 더미 텍스트, 랜덤 문장}
+
+\enabstracttitle{An Exploratory Study on the Impact of Non-Systematic Conceptual Combinations on Document Length}
+\enabstractsubtitle{A Case Study of Semantically Insignificant Text for Thesis Format Testing}
+\enauthor{Ah, Anonymous}
+\enDepartment{Department of Academic Document Structure}
+\enmajor{Major in Education Technology}
+\engradschool{Graduate School of Education, Konkuk University}
+\enkeywords{academic formatting, meaningless text, document structure, thesis template testing}
+
+\begin{document}
+
+\makecover
+\makecertificate
+\makeapproval
+
+% ---- 앞부분 로마 페이지 시작 ----
+\frontpages
+
+% =========================
+% 1) 앞부분 전용 목차 출력
+% =========================
+% (표목차/그림목차/국문초록 등이 여기에 들어감)
+\makeindexlist
+
+% =========================
+% 국문초록
+% =========================
+\addbackcontentsline{part}{국문초록}
+\makeabstract
+\clearpage
+
+% 국문초록 내용은 chapters/etc-abstract(kor).tex 파일에 작성하세요.
+
+% =========================
+% 2) 본문 시작
+% =========================
+\mainpages
+
+% ---- 1~5장(여기서는 section 단위) ----
+\input{chapters/ch01-intro.tex}
+\clearpage
+
+\input{chapters/ch02-relatedworks.tex}
+\clearpage
+
+\input{chapters/ch03-researchdesign.tex}
+\clearpage
+
+\input{chapters/ch04-experiment&analysis.tex}
+\clearpage
+
+\input{chapters/ch05-conclusion.tex}
+\clearpage
+
+% =========================
+% 3) 뒷부분(참고문헌/Abstract 등) + 뒷부분 목차
+% =========================
+% 뒷부분 목차는 "뒷부분 항목들을 등록한 뒤" 출력하는 게 자연스러움.
+% (페이지 번호가 맞게 들어가도록 각 항목 시작 시점에 등록)
+\addbackcontentsline{part}{참고문헌}
+\printreferences
+\clearpage
+
+\addbackcontentsline{part}{Abstract}
+\makeenabstract
+\clearpage
+
+% 영문초록 내용은 chapters/etc-abstract(eng).tex 파일에 작성하세요.
+
+\end{document}

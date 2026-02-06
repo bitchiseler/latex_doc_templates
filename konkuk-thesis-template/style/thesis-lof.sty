@@ -1,0 +1,61 @@
+% =====================================
+% thesis-lof.sty
+% 그림목차 (tocloft 기반)
+%  - LOF 제목 직접 출력
+%  - 그림 번호는 "장-그림" 형태에서 장 번호는 숫자만 사용
+% =====================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thesis-lof}[2025/12/13 KKEDU LOF style]
+
+% tocloft 사용
+\RequirePackage{tocloft}
+
+% -------------------------------------
+% 이름(제목 문자열)
+% -------------------------------------
+\renewcommand{\listfigurename}{그림 목차}
+
+% -------------------------------------
+% 공통: 제목(16pt, 가운데)
+% -------------------------------------
+\providecommand{\kk@centertitle}[1]{%
+  \begin{center}
+    {\bfseries\fontsize{16pt}{18pt}\selectfont #1\par}
+  \end{center}
+}
+
+% -------------------------------------
+% 그림목차: 제목을 직접 출력하고,
+% 내부 기본 제목은 출력되지 않게 막는다.
+% -------------------------------------
+\providecommand{\makelistoffigures}{%
+  \clearpage
+  \thispagestyle{plain}
+  \kk@centertitle{\listfigurename}
+  \vspace*{0mm}%
+  \begingroup
+    \let\listfigurename\relax
+    \listoffigures
+  \endgroup
+  \clearpage
+}
+
+% -------------------------------------
+% TOC 폰트(11pt) - 줄간격 축소
+% -------------------------------------
+\renewcommand{\cftfigfont}{\fontsize{11pt}{12pt}\selectfont}
+\renewcommand{\cftfigpagefont}{\fontsize{11pt}{12pt}\selectfont}
+
+% -------------------------------------
+% 점선 리더(촘촘)
+% -------------------------------------
+\renewcommand{\cftdotsep}{1}
+\renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
+
+% -------------------------------------
+% 들여쓰기/번호폭(겹침 방지)
+%  - "5-12" 정도까지는 30mm면 대개 충분
+% -------------------------------------
+\setlength{\cftfigindent}{0mm}
+\setlength{\cftfignumwidth}{21mm}

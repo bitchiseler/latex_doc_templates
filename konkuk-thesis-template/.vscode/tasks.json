@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build with Tectonic",
+      "type": "shell",
+      "command": "tectonic",
+      "args": ["thesis.tex"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

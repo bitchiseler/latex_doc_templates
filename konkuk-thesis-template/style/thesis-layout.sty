@@ -1,0 +1,81 @@
+% =====================================
+% thesis-layout.sty
+% 페이지 레이아웃 및 기본 설정
+% =====================================
+
+% =====================================
+% Page layout (B5)
+% =====================================
+\geometry{
+  paperwidth=182mm,
+  paperheight=257mm,
+  top=25mm,
+  bottom=25mm,
+  left=25mm,
+  right=25mm
+}
+
+% 줄간격 설정 (Word 기준)
+% 180% (1.5배) - 현재 설정
+%\setstretch{1.8}
+% 200% (2배)로 설정하려면 위 줄을 주석 처리하고 아래 줄을 사용하세요
+\setstretch{2.0}
+
+% 장 평 97% 설정
+\linespread{0.97}
+\AtBeginDocument{\justifying}
+
+% =====================================
+% Table / Figure naming
+% =====================================
+\renewcommand{\tablename}{표}
+\renewcommand{\figurename}{그림}
+\renewcommand{\thetable}{\thesection-\arabic{table}}
+\renewcommand{\thefigure}{\thesection-\arabic{figure}}
+
+% =====================================
+% Section as Chapter
+% =====================================
+\titleformat{\section}
+  {\centering\bfseries\fontsize{16pt}{18pt}\selectfont}
+  {제\thesection 장}
+  {1em}{}
+
+% =====================================
+% Page numbering helpers
+% =====================================
+\newcommand{\frontpages}{%
+  \pagenumbering{roman}\setcounter{page}{1}
+}
+\newcommand{\mainpages}{%
+  \clearpage
+  \pagenumbering{arabic}\setcounter{page}{1}
+}
+
+% -----------------------------
+% Captions: <표 5-1> ..., <그림 5-1> ...
+% -----------------------------
+\RequirePackage{caption}
+
+% 라벨 이름을 강제로 "표/그림"으로 고정 (기존에 <표> 같은 게 들어가 있으면 여기서 제거됨)
+\captionsetup[table]{name=표}
+\captionsetup[figure]{name=그림}
+
+% 라벨(표 5-1 / 그림 5-1)을 <...>로 감싸기
+\DeclareCaptionLabelFormat{kkedu@bracket}{<#1~#2>}
+
+% 기존에 labelsep이 » 등으로 바뀌어 있어도 여기서 강제 덮어쓰기
+\captionsetup[table]{labelformat=kkedu@bracket,labelsep=space}
+\captionsetup[figure]{labelformat=kkedu@bracket,labelsep=space}
+
+\usepackage[
+  backend=biber,
+  style=numeric,   % 숫자 인용
+  sorting=none,    % 본문 인용 순서 = 번호
+  defernumbers=true
+]{biblatex}
+
+\addbibresource{refs.bib}
+
+% 2줄 이상일 때 둘째 줄부터 들여쓰기
+\setlength{\bibhang}{2em}

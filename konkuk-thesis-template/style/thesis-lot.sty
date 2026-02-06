@@ -1,0 +1,59 @@
+% =====================================
+% thesis-lot.sty
+% 표목차 (tocloft 기반)
+% =====================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thesis-lot}[2025/12/13 KKEDU LOT style]
+
+% tocloft 사용
+\RequirePackage{tocloft}
+
+% -------------------------------------
+% 이름(제목 문자열)
+% -------------------------------------
+\renewcommand{\listtablename}{표 목차}
+
+% -------------------------------------
+% 공통: 제목(16pt, 가운데)
+% -------------------------------------
+\providecommand{\kk@centertitle}[1]{%
+  \begin{center}
+    {\bfseries\fontsize{16pt}{18pt}\selectfont #1\par}
+  \end{center}
+}
+
+% -------------------------------------
+% 표목차: 제목을 직접 출력하고,
+% 내부 기본 제목은 출력되지 않게 막는다.
+% -------------------------------------
+\providecommand{\makelistoftables}{%
+  \clearpage
+  \thispagestyle{plain}
+  \kk@centertitle{\listtablename}
+  \vspace*{0mm}%
+  \begingroup
+    \let\listtablename\relax
+    \listoftables
+  \endgroup
+  \clearpage
+}
+
+% -------------------------------------
+% TOC 폰트(11pt) - 줄간격 축소
+% -------------------------------------
+\renewcommand{\cfttabfont}{\fontsize{11pt}{12pt}\selectfont}
+\renewcommand{\cfttabpagefont}{\fontsize{11pt}{12pt}\selectfont}
+
+% -------------------------------------
+% 점선 리더(촘촘)
+% -------------------------------------
+\renewcommand{\cftdotsep}{1}
+\renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
+
+% -------------------------------------
+% 들여쓰기/번호폭(겹침 방지)
+%  - <표 1-1> 같은 번호가 길어질수록 numwidth를 늘려야 함
+% -------------------------------------
+\setlength{\cfttabindent}{0mm}
+\setlength{\cfttabnumwidth}{21mm}

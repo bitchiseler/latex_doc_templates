@@ -1,0 +1,161 @@
+% =====================================
+% thesis-toc.sty
+% 목차 (tocloft 기반) + front/back TOC 분리(ftoc/btoc)
+% =====================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thesis-toc}[2025/12/13 KKEDU TOC style]
+
+\RequirePackage{tocloft}
+
+% ==========================================================
+% (NEW) front/back 전용 목차 파일(ftoc/btoc) 지원
+% ==========================================================
+\makeatletter
+% ftoc/btoc 읽기
+\newcommand{\fronttableofcontents}{\@starttoc{ftoc}}
+\newcommand{\backtableofcontents}{\@starttoc{btoc}}
+
+% ftoc/btoc에 항목 추가용 래퍼
+% 사용: \addfrontcontentsline{part}{표 목차}
+% 사용: \addbackcontentsline{part}{Abstract}
+\newcommand{\addfrontcontentsline}[2]{\addcontentsline{ftoc}{#1}{#2}}
+\newcommand{\addbackcontentsline}[2]{\addcontentsline{btoc}{#1}{#2}}
+\makeatother
+
+% ==========================================================
+% (NEW) 앞부분 전체 구성 한 번에 생성
+%  - 앞목차(ftoc)
+%  - 본문목차(toc)
+%  - 뒷목차(btoc)
+%  - 표목차 / 그림목차 / 국문초록
+% ==========================================================
+\providecommand{\makeindexlist}{%
+  % ========================= % 목차 제목 (첫 페이지 맨 위) % ========================= 
+  \thispagestyle{plain} 
+  \begin{center}
+    {\bfseries\fontsize{16pt}{18pt}\selectfont 목 차 \par}
+  \end{center}
+  
+  % ---- 앞부분 전용 목차 ----
+  \makefrontcontents
+
+  % ---- 본문 목차 ----
+  \makecontents
+
+  % ---- 뒷부분 전용 목차 ----
+  \makebackcontents
+  \clearpage
+  % =========================
+  % 앞부분 실제 콘텐츠
+  % =========================
+
+  % ---- 표 목차 ----
+  \addfrontcontentsline{part}{표 목차}
+  \makelistoftables
+  \clearpage
+
+  % ---- 그림 목차 ----
+  \addfrontcontentsline{part}{그림 목차}
+  \makelistoffigures
+  \clearpage
+
+  % ---- 국문초록 ----
+  \addfrontcontentsline{part}{국문초록}
+  \makeabstract
+  \clearpage
+}
+
+% ==========================================================
+% (NEW) 앞/뒷부분 목차 출력 명령
+% ==========================================================
+% 앞부분 목차(표목차/그림목차/국문초록 등)
+\providecommand{\makefrontcontents}{%
+  \thispagestyle{plain}
+  \vspace*{10mm}
+  \begingroup
+    \fronttableofcontents
+  \endgroup
+}
+
+% 뒷부분 목차(첨부문서/비고/Abstract 등)
+\providecommand{\makebackcontents}{%
+  \thispagestyle{plain}
+  \vspace*{10mm}
+  \begingroup
+    \backtableofcontents
+  \endgroup
+  \clearpage
+}
+
+% -------------------------------------
+% 본문 목차 생성 명령어 정의 (기존 toc)
+% -------------------------------------
+\providecommand{\makecontents}{%
+  \thispagestyle{plain}
+  \begingroup
+    \let\contentsname\relax   % tableofcontents 내부 제목도 방지
+    \linespread{1.3}\selectfont
+    \setcounter{tocdepth}{3}
+    \tableofcontents
+    \endgroup
+}
+
+% -------------------------------------
+% 목차 항목 폰트 설정 (11pt)
+% -------------------------------------
+\renewcommand{\cftsecfont}{\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\cftsecpagefont}{\fontsize{11pt}{13pt}\selectfont}
+
+\renewcommand{\cftsubsecfont}{\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\cftsubsecpagefont}{\fontsize{11pt}{13pt}\selectfont}
+
+\renewcommand{\cftsubsubsecfont}{\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\cftsubsubsecpagefont}{\fontsize{11pt}{13pt}\selectfont}
+
+% -------------------------------------
+% (NEW) part 레벨(표목차/그림목차/국문초록/첨부문서/비고/Abstract)에 대한 폰트/리더/간격
+%  - ftoc/btoc에 \add...(part){...} 로 넣을 때 이 스타일이 적용됨
+% -------------------------------------
+\renewcommand{\cftpartfont}{\bfseries\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\cftpartpagefont}{\bfseries\fontsize{11pt}{13pt}\selectfont}
+
+% part 들여쓰기/번호폭: 보통 번호 없는 항목을 넣을 것이므로 numwidth는 작게
+\setlength{\cftpartindent}{0mm}
+\setlength{\cftpartnumwidth}{0mm}
+
+% part 항목 간격(촘촘하게)
+\setlength{\cftbeforepartskip}{0.3em}
+
+% -------------------------------------
+% 점선 리더 설정 (촘촘하게)
+% -------------------------------------
+\renewcommand{\cftdotsep}{1}
+
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsubsubsecleader}{\cftdotfill{\cftdotsep}}
+
+% part에도 동일하게 점선 리더 적용(원치 않으면 아래 줄을 주석 처리)
+\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}}
+
+% -------------------------------------
+% 들여쓰기 및 번호 폭 설정 (겹침 방지)
+% -------------------------------------
+\setlength{\cftsecindent}{0mm}
+\setlength{\cftsecnumwidth}{17mm}
+
+\setlength{\cftsubsecindent}{5mm}
+\setlength{\cftsubsecnumwidth}{12mm}
+
+\setlength{\cftsubsubsecindent}{9mm}
+\setlength{\cftsubsubsecnumwidth}{8mm}
+
+% -------------------------------------
+% 목차 번호 형식 설정 ("제 1장"처럼 보이게)
+% -------------------------------------
+\renewcommand{\cftsecpresnum}{제}
+\renewcommand{\cftsecaftersnum}{장\hspace{1em}}
+
+\renewcommand{\cftsubsecpresnum}{제}
+\renewcommand{\cftsubsecaftersnum}{절\hspace{1em}}

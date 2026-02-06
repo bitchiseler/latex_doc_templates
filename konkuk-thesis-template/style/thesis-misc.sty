@@ -1,0 +1,62 @@
+% =====================================
+% thesis-misc.sty
+% 기타 유틸리티 및 참고문헌 분류 기능
+% =====================================
+
+% 참고문헌 분류를 위한 명령어
+\newcommand{\refcategory}[1]{%
+  \def\@refcategory{#1}%
+}
+
+% 동양서, 서양서, 전자자료 분류를 위한 환경
+\newenvironment{koreanrefs}{%
+  \refcategory{동양서}%
+  \subsection*{동양서}%
+  \addcontentsline{toc}{subsection}{동양서}%
+}{}
+
+\newenvironment{westernrefs}{%
+  \refcategory{서양서}%
+  \subsection*{서양서}%
+  \addcontentsline{toc}{subsection}{서양서}%
+}{}
+
+\newenvironment{electronicrefs}{%
+  \refcategory{전자자료}%
+  \subsection*{전자자료}%
+  \addcontentsline{toc}{subsection}{전자자료}%
+}{}
+
+% BibTeX 항목을 분류하는 명령어
+\newcommand{\bibitemcategory}[2]{%
+  \bibitem{#1}%
+  \def\@currentbibcategory{#2}%
+}
+
+% BibTeX 스타일을 위한 분류 필터
+\def\@bib@koreanfilter#1{%
+  \def\@temp{#1}%
+  \ifx\@temp\@empty\else
+    \ifnum\pdfstrcmp{\@currentbibcategory}{동양서}=0
+      #1%
+    \fi
+  \fi
+}
+
+\def\@bib@westernfilter#1{%
+  \def\@temp{#1}%
+  \ifx\@temp\@empty\else
+    \ifnum\pdfstrcmp{\@currentbibcategory}{서양서}=0
+      #1%
+    \fi
+  \fi
+}
+
+\def\@bib@electronicfilter#1{%
+  \def\@temp{#1}%
+  \ifx\@temp\@empty\else
+    \ifnum\pdfstrcmp{\@currentbibcategory}{전자자료}=0
+      #1%
+    \fi
+  \fi
+}

@@ -1,0 +1,98 @@
+% =====================================
+% thesis-hierarchy.sty
+% 섹션 계층 구조 및 번호 표시 방식
+%   - 번호(참조/캡션/그림/표)는 "숫자"로 유지
+%   - 제목 출력에서만 "제 ... 장/절"을 붙여서 표시
+% =====================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thesis-hierarchy}[2025/12/13 KKEDU hierarchy style]
+
+\RequirePackage{titlesec}
+
+% =====================================
+% 한글 가나다 번호(가,나,다, ... , 하, 거, 너, ...)
+% - 1~28 지원
+% - 29 이상은 ? 로 표시 (필요시 확장 가능)
+% =====================================
+\newcommand{\kk@hangulalph}[1]{%
+  \ifcase#1\or
+  가\or 나\or 다\or 라\or 마\or 바\or 사\or 아\or 자\or 차\or 카\or 타\or 파\or 하\or
+  거\or 너\or 더\or 러\or 머\or 버\or 서\or 어\or 저\or 처\or 커\or 터\or 퍼\or 허%
+  \else
+  \textbf{?}%
+  \fi
+}
+
+% =====================================
+% 8단계 등에서 현재 글꼴 크기에서 2pt 줄이기
+% =====================================
+\makeatletter
+\newcommand{\kk@fontsizeMinusTwo}[1]{%
+  {\fontsize{\dimexpr\f@size\p@-2pt\relax}{\dimexpr\f@size\p@\relax}\selectfont #1}%
+}
+\makeatother
+
+% =====================================
+% 섹션 번호(카운터 표현) 재정의
+%  - 여기서는 "숫자"만 유지해야 함
+%  - "제...장/절"은 titleformat에서만 붙인다
+% =====================================
+
+% (당신 템플릿에서 \section = 장 역할)
+\renewcommand{\thesection}{\arabic{section}}
+
+% (당신 템플릿에서 \subsection = 절 역할)
+% 장 아래 절을 1,2,3...으로 쓰고 싶다면 아래처럼:
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+% 항 번호 표시 (1., 2., ...)
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}.}
+
+% -------------------------------------
+% 절 번호가 "장마다 1부터" 다시 시작하게 보장
+% (클래스에서 이미 하고 있으면 중복돼도 큰 문제는 없지만,
+%  확실히 하려면 아래를 두는 게 안전)
+% -------------------------------------
+\makeatletter
+\@addtoreset{subsection}{section}
+\@addtoreset{subsubsection}{subsection}
+\makeatother
+
+% =====================================
+% 섹션 제목 형식 정의 (titlesec)
+%  - label 부분에서만 "제 ... 장/절"을 붙임
+% =====================================
+
+% 장 제목 형식 (중앙정렬): "제 1 장"
+\titleformat{\section}
+  {\centering\bfseries\Large}
+  {제~\thesection~장}
+  {1em}
+  {}
+
+% 절 제목 형식: "제 1 절"  (장마다 절 번호가 1부터)
+\titleformat{\subsection}
+  {\bfseries\large}
+  {제~\thesubsection~절}
+  {1em}
+  {}
+
+% 항 제목 형식 (띄어쓰기 1글자+숫자+마침표)
+\titleformat{\subsubsection}
+  {\bfseries\normalsize}
+  {\hspace{1em}\thesubsubsection}
+  {0em}
+  {}
+
+% =====================================
+% 섹션 간격 조정
+% =====================================
+
+% 장 전후 간격
+\titlespacing{\section}{0pt}{20pt}{15pt}
+
+% 절 전후 간격
+\titlespacing{\subsection}{0pt}{15pt}{10pt}
+
+% 항 전후 간격
+\titlespacing{\subsubsection}{0pt}{10pt}{5pt}

@@ -1,0 +1,93 @@
+% =====================================
+% thesis-abstract.sty
+% 국문초록, 영문초록
+% =====================================
+
+% =====================================
+% Korean Abstract helper (국문초록)
+% =====================================
+
+% 필요한 변수 정의
+\newcommand{\kk@abstitle}{논문 제목}
+\newcommand{\kk@abssubtitle}{부제}
+\newcommand{\kk@keywords}{키워드1, 키워드2, 키워드3}
+
+% English Abstract helper (영문초록)
+\newcommand{\kk@enabstitle}{English Title}
+\newcommand{\kk@enabssubtitle}{English Subtitle}
+\newcommand{\kk@enauthor}{Hong, Gildong}
+\newcommand{\kk@enDepartment}{Department of xxx}
+\newcommand{\kk@enmajor}{Major in xxx}
+\newcommand{\kk@engradschool}{Graduate School of Education, Konkuk University}
+\newcommand{\kk@enkeywords}{keyword1, keyword2, keyword3}
+\newcommand{\makeabstract}{%
+\clearpage
+\thispagestyle{plain}
+
+{\raggedright\noindent{\fontsize{14pt}{16pt}\bfseries 국문초록\par}}
+
+\vspace*{0mm}
+\begin{center}
+{\fontsize{16pt}{25pt}\bfseries \kk@abstitle\par}
+\vspace{6mm}
+{\fontsize{14pt}{20pt}\selectfont \kk@abssubtitle\par}
+\end{center}
+
+\vspace*{12mm}
+{\fontsize{11pt}{12pt}\selectfont
+\input{chapters/etc-abstract(kor).tex}
+\par}
+
+\vfill
+\noindent\rule{\textwidth}{0.4pt}\par
+\vspace{2mm}
+{\fontsize{9pt}{11pt}\selectfont
+\noindent 주제어: \hspace{2mm} \kk@keywords
+\par}
+}
+
+% =====================================
+% English Abstract helper (영문초록)
+% =====================================
+\newcommand{\makeenabstract}{%
+\clearpage
+\thispagestyle{plain}
+
+% ---- 상단: ABSTRACT (14pt, 왼쪽) ----
+\vspace*{0mm}
+{\raggedright\noindent{\fontsize{14pt}{16pt}\bfseries ABSTRACT\par}}
+
+% ---- 제목/부제 (가운데) ----
+\vspace*{6mm}
+\begin{center}
+{\fontsize{16pt}{18pt}\bfseries \kk@enabstitle\par}
+\vspace{6mm}
+{\fontsize{14pt}{16pt}\selectfont \kk@enabssubtitle\par}
+\end{center}
+
+% ---- 작성자/소속 블록 (11pt, 오른쪽 정렬) ----
+\vspace*{6mm}
+{\raggedleft
+{\fontsize{11pt}{13pt}\selectfont \kk@enauthor\par}
+\vspace{2mm}
+{\fontsize{11pt}{13pt}\selectfont \kk@enDepartment\par}
+\vspace{2mm}
+{\fontsize{11pt}{13pt}\selectfont \kk@enmajor\par}
+\vspace{2mm}
+{\fontsize{11pt}{13pt}\selectfont \kk@engradschool\par}
+\par}
+
+% ---- 본문 (11pt, 왼쪽) ----
+\vspace*{6mm}
+{\fontsize{12pt}{48pt}\selectfont
+\input{chapters/etc-abstract(eng).tex}
+\par}
+
+% ---- 하단: Keywords (9pt) ----
+\vfill
+\noindent\rule{\textwidth}{0.4pt}\par
+\vspace{2mm}
+{\fontsize{9pt}{11pt}\selectfont
+\noindent Keywords: \hspace{2mm} \kk@enkeywords
+\par}
+}

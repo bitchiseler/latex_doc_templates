@@ -1,0 +1,31 @@
+% =====================================
+% thesis-references.sty (biblatex+biber)
+% =====================================
+
+\newcommand{\kk@reftitle}{참고문헌}
+\newcommand{\referencestitle}[1]{\def\kk@reftitle{#1}}
+
+\newcommand{\printreferences}{%
+  \clearpage
+  \thispagestyle{plain}
+
+  \begin{center}
+    {\bfseries\fontsize{16pt}{18pt}\selectfont \kk@reftitle\par}
+  \end{center}
+  \vspace*{0mm}
+
+  % ---- 동양서 ----
+  \subsection*{동양서}
+  \addcontentsline{toc}{subsection}{동양서}
+  \printbibliography[keyword={동양서}, heading=none]
+
+  % ---- 서양서 ----
+  \subsection*{서양서}
+  \addcontentsline{toc}{subsection}{서양서}
+  \printbibliography[keyword={서양서}, heading=none]
+
+  % ---- 전자자료 ----
+  \subsection*{전자자료}
+  \addcontentsline{toc}{subsection}{전자자료}
+  \printbibliography[keyword={전자자료}, heading=none]
+}

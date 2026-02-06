@@ -1,0 +1,121 @@
+% =====================================
+% thesis-cover.sty
+% 표지, 청구지, 인준지
+% =====================================
+
+% =====================================
+% Cover (표지)
+% =====================================
+\newcommand{\makecover}{
+\thispagestyle{empty}
+
+% 상단: 좌측 정렬 + 위로 올린 버전(필요시 12mm 조절)
+\vspace*{0mm}
+{\raggedright
+\noindent{\fontsize{14pt}{16pt}\selectfont 석(박사)학위 청구논문\par}
+\vspace{4mm}
+\noindent{\fontsize{14pt}{16pt}\selectfont \kk@advisor\par}
+}
+
+% 중앙: 제목/부제
+\vspace{15mm}
+\begin{center}
+{\fontsize{20pt}{24pt}\bfseries \kk@title\par}
+\vspace{6mm}
+{\fontsize{16pt}{20pt}\selectfont \kk@subtitle\par}
+\end{center}
+
+% 하단 블록
+\vfill
+\begin{center}
+{\fontsize{16pt}{18pt}\selectfont \kk@coverdate\par}
+\vspace{30mm}
+{\fontsize{18pt}{20pt}\bfseries 건국대학교 대학원\par}
+\vspace{10mm}
+{\fontsize{16pt}{18pt}\selectfont \kk@dept\par}
+\vspace{8mm}
+{\fontsize{18pt}{20pt}\bfseries \kk@author\par}
+\end{center}
+
+\clearpage
+}
+
+% =====================================
+% Certificate (청구지)
+% =====================================
+\newcommand{\makecertificate}{
+\thispagestyle{empty}
+
+\vspace*{0mm}
+\begin{center}
+{\fontsize{20pt}{22pt}\bfseries \kk@title\par}
+\vspace{4mm}
+{\fontsize{16pt}{18pt}\selectfont \kk@subtitle\par}
+\vspace{4mm}
+{\fontsize{16pt}{18pt}\selectfont \kk@engtitle\par}
+\vspace{4mm}
+{\fontsize{14pt}{16pt}\selectfont \kk@engsubtitle\par}
+\end{center}
+
+% 청구문 (고정문구)
+\vspace*{33mm}
+\begin{center}
+{\fontsize{16pt}{18pt}\selectfont 이 논문을 교육학 석사학위 청구논문으로 제출합니다.\par}
+\end{center}
+
+\vfill
+\begin{center}
+{\fontsize{16pt}{18pt}\selectfont \kk@submitdate\par}
+\end{center}
+
+\vspace*{25mm}
+\begin{center}
+{\fontsize{18pt}{20pt}\bfseries \kk@school\par}
+\vspace{5mm}
+{\fontsize{16pt}{18pt}\selectfont \kk@dept\par}
+\vspace{5mm}
+{\fontsize{18pt}{20pt}\bfseries \kk@author\par}
+\end{center}
+
+\clearpage
+}
+
+% =====================================
+% Approval (인준지)
+% =====================================
+\newcommand{\makeapproval}{
+\thispagestyle{empty}
+
+\vspace*{0mm}
+\begin{center}
+{\fontsize{16pt}{18pt}\selectfont \kk@author 의 석사학위 청구논문을 인준함.\par}
+\end{center}
+
+\vspace*{45mm}
+
+% 라벨 + 선 + (인)
+\noindent\hspace*{20mm}{\fontsize{14pt}{16pt}\selectfont 심사위원장\hspace{7mm}%
+\rule{47mm}{0.4pt}\hspace{6mm}(인)\par}
+
+\vspace*{10mm}
+
+\noindent\hspace*{20mm}{\fontsize{14pt}{16pt}\selectfont 심사위원\hspace{12mm}%
+\rule{47mm}{0.4pt}\hspace{6mm}(인)\par}
+
+\vspace*{10mm}
+
+\noindent\hspace*{20mm}{\fontsize{14pt}{16pt}\selectfont 심사위원\hspace{12mm}%
+\rule{47mm}{0.4pt}\hspace{6mm}(인)\par}
+
+\vfill
+\begin{center}
+{\fontsize{16pt}{18pt}\selectfont \kk@approvaldate\par}
+\end{center}
+
+\vspace*{10mm}
+\begin{center}
+{\fontsize{18pt}{20pt}\bfseries \kk@school\par}
+\end{center}
+\vspace*{8mm}
+\clearpage
+}
